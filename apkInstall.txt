@@ -1,0 +1,41 @@
+@echo off
+set apk={0}
+set main_obb={1}
+set patch_obb={2}
+set ver={3}
+set region={4}
+
+echo Uninstalling old global apk
+adb uninstall com.cdprojektred.gwent 2>nul
+if errorlevel 1 echo No apk to uninstall
+echo.
+
+echo Uninstalling old gaea apk
+adb uninstall com.cdprojektred.gwent.china 2>nul
+if errorlevel 1 echo No apk to uninstall
+echo.
+
+adb install -r -t "%~dp0%apk%"
+if errorlevel 1 echo adb install FAILED with error #%errorlevel%.
+if errorlevel 1 PAUSE
+if errorlevel 1 EXIT
+echo.
+
+echo Pushing %main_obb%
+adb push "%~dp0%main_obb%" /sdcard/android/obb/com.cdprojektred.%region%/main.%ver%.com.cdprojektred.%region%.obb
+if errorlevel 0 echo Success
+if errorlevel 1 echo adb push FAILED with error #%errorlevel%.
+if errorlevel 1 PAUSE
+if errorlevel 1 EXIT
+echo.
+
+echo Pushing %patch_obb%
+adb push "%~dp0%patch_obb%" /sdcard/android/obb/com.cdprojektred.%region%/patch.%ver%.com.cdprojektred.%region%.obb
+if errorlevel 0 echo Success
+if errorlevel 1 echo adb push FAILED with error #%errorlevel%.
+if errorlevel 1 PAUSE
+if errorlevel 1 EXIT
+echo.
+
+echo Installation finished!
+PAUSE

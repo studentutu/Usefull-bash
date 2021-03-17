@@ -1,0 +1,4 @@
+Sidequest (sidequest app) After installation on the device, you have an option to update the asset bundle directly on it. Steps to follow :
+
+    unpack the bundle archiv locally (it will contain a folder with all of the .manifest and actual bundles (files with no extension))
+    copy all content (including manifest file) to sdcard > Android > data > com.TransfrVR.common > files > Content > assetbundles **When sideloading with sidequest please be sure to open the tab with the task progress, otherwise, it can copy into the root locations **
